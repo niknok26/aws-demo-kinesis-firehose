@@ -19,4 +19,5 @@ while True:
         print(data)
         kinesis.put_record(
                 DeliveryStreamName="stock-delivery-stream",
-                Record={'Data':data})
+                Record={ 'Data': data + '\n' }
+                )
