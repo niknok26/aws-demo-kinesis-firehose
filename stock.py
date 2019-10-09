@@ -1,10 +1,9 @@
- 
 import json
 import boto3
 import random
 import datetime
 
-kinesis = boto3.client('kinesis')
+kinesis = boto3.client('firehose')
 def getReferrer():
     data = {}
     now = datetime.datetime.now()
@@ -19,7 +18,5 @@ while True:
         data = json.dumps(getReferrer())
         print(data)
         kinesis.put_record(
-                StreamName="ExampleInputStream",
-                Data=data,
-                PartitionKey="partitionkey")
- 
+                DeliveryStreamName="stock-delivery-stream",
+                Record={'Data':data})
